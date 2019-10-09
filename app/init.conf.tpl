@@ -9,8 +9,9 @@ write_files:
   permissions: '0755'
 - path: "/etc/environment"
   content: |
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
     %{ for env in envs ~}
-    export ${env.key}=${env.value}
+    ${env.key}=${env.value}
     %{ endfor ~}
 runcmd:
 - [ echo, "hello" ]
