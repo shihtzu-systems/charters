@@ -52,6 +52,7 @@ data template_cloudinit_config this {
     content      = templatefile("${path.module}/init.conf.tpl",
     {
       name = var.name
+      envs = var.envs
     })
   }
 

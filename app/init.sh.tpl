@@ -2,6 +2,7 @@
 
 echo "checkout ${name}"
 sudo git clone ${git} /opt/${group}/${name}
+make -C /opt/${group}/${name} init
 
 echo "creating systemd service"
 cat > /tmp/${name}.service << EOF

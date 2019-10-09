@@ -2,8 +2,16 @@ variable name {
   description = "Name of the app"
 }
 
+variable envs {
+  description = "v1: envs"
+  type = list(object({
+    key = string
+    value = string
+  }))
+}
+
 variable vpc {
-  description = "v1: vpc info"
+  description = "v1: vpc"
   type = object({
     vpc_id            = string
     network_address   = string
