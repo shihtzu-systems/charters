@@ -1,4 +1,6 @@
 #cloud-config
+packages:
+ - make
 write_files:
 - encoding: gzip
   content: !!binary |
