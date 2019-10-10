@@ -1,4 +1,5 @@
 #cloud-config
+package_update: true
 packages:
 %{ for package in packages ~}
 - ${package}
@@ -16,4 +17,7 @@ write_files:
     %{ endfor ~}
 runcmd:
 - [ echo, "hello" ]
+%{ for cmd in preInitCommands ~}
+- ${cmd}
+%{ endfor ~}
 - [ init.sh ]
