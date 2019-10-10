@@ -10,6 +10,12 @@ variable envs {
   }))
 }
 
+variable packages {
+  description = "The apt packages to install"
+  type = list(string)
+  default = [ "make" ]
+}
+
 variable vpc {
   description = "v1: vpc"
   type = object({

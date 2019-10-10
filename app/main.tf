@@ -53,6 +53,7 @@ data template_cloudinit_config this {
     {
       name = var.name
       envs = var.envs
+      packages = var.packages
     })
   }
 

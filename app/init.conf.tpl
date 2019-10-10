@@ -1,6 +1,8 @@
 #cloud-config
 packages:
- - make
+%{ for package in packages ~}
+- ${package}
+%{ endfor ~}
 write_files:
 - encoding: gzip
   content: !!binary |
