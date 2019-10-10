@@ -2,6 +2,18 @@ variable name {
   description = "Name of the app"
 }
 
+variable group {
+  description = "Name of the group"
+}
+
+variable gitUrl {
+  description = "The git url to the project"
+}
+
+variable command {
+  description = "The command args to pass when starting the app"
+}
+
 variable envs {
   description = "v1: envs"
   type = list(object({

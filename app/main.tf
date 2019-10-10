@@ -51,6 +51,7 @@ data template_cloudinit_config this {
     content_type = "text/cloud-config"
     content      = templatefile("${path.module}/init.conf.tpl",
     {
+      group = var.group
       name = var.name
       envs = var.envs
       packages = var.packages
@@ -62,12 +63,12 @@ data template_cloudinit_config this {
     content_type = "text/x-shellscript"
     content      = templatefile("${path.module}/init.sh.tpl",
     {
-      group = "shihtzu"
+      group = var.group
       name = var.name
-      git = "https://github.com/shihtzu-systems/${var.name}.git"
+      git = var.gitUrl
       os = "linux"
       arch = "amd64"
-      cmd = "server"
+      cmd = var.command
     })
   }
 
