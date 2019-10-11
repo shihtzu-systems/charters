@@ -24,14 +24,6 @@ variable command {
   type        = string
 }
 
-variable envs {
-  description = "v1: envs"
-  type = list(object({
-    key   = string
-    value = string
-  }))
-}
-
 variable packages {
   description = "The apt packages to install"
   type        = list(string)

@@ -53,7 +53,6 @@ data template_cloudinit_config this {
       {
         group       = var.group
         name        = var.name
-        envs        = var.envs
         packages    = var.packages
         preInitCmds = var.pre_init_commands
     })
