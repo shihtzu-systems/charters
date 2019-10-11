@@ -2,8 +2,16 @@ variable name {
   description = "Name of the networking stuff"
 }
 
-variable cert_arn {
-  description = "The ARN of the cert to use for https"
+variable subdomain {
+  description = "The DNS subdomain to use"
+}
+
+variable domain {
+  description = "The DNS domain to use"
+}
+
+variable cert_domain {
+  description = "The domain of the cert to look up"
 }
 
 variable vpc {

@@ -2,6 +2,12 @@ locals {
   common_tags = map("Created", "terraform")
 }
 
+data aws_acm_certificate this {
+  domain      = var.cert_domain
+  types       = ["AMAZON_ISSUED"]
+  most_recent = true
+}
+
 module http_all {
   source  = "terraform-aws-modules/security-group/aws//modules/http-80"
   version = "3.1.0"
@@ -39,7 +45,7 @@ module alb {
 
   https_listeners = [
     {
-      certificate_arn = var.cert_arn
+      certificate_arn = data.aws_acm_certificate.this.arn
       port            = 443
     }
   ]
@@ -63,4 +69,21 @@ module alb {
   target_groups_count = "1"
 
   tags = local.common_tags
+}
+
+data aws_route53_zone this {
+  name         = var.domain
+  private_zone = false
+}
+
+resource aws_route53_record this {
+  zone_id = data.aws_route53_zone.this.id
+  name    = "${var.subdomain}.${var.domain}"
+  type    = "A"
+
+  alias {
+    name                   = module.alb.dns_name
+    zone_id                = module.alb.load_balancer_zone_id
+    evaluate_target_health = true
+  }
 }
