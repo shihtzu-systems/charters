@@ -19,7 +19,7 @@ data aws_ami ubuntu {
 }
 
 module http_internal {
-  source  = "terraform-aws-modules/security-group/aws//modules/http-80"
+  source  = "terraform-aws-modules/security-group/aws//modules/http-8080"
   version = "3.1.0"
 
   name                = "${var.name}-http-internal-traffic"
