@@ -44,32 +44,33 @@ module ssh_me {
 
 data template_cloudinit_config this {
   base64_encode = false
-  gzip = false
+  gzip          = false
 
   part {
     filename     = "init.conf"
     content_type = "text/cloud-config"
-    content      = templatefile("${path.module}/init.conf.tpl",
-    {
-      group = var.group
-      name = var.name
-      envs = var.envs
-      packages = var.packages
-      preInitCmds = var.preInitCommands
+    content = templatefile("${path.module}/init.conf.tpl",
+      {
+        group       = var.group
+        name        = var.name
+        envs        = var.envs
+        packages    = var.packages
+        preInitCmds = var.pre_init_commands
     })
   }
 
   part {
     filename     = "init.sh"
     content_type = "text/x-shellscript"
-    content      = templatefile("${path.module}/init.sh.tpl",
-    {
-      group = var.group
-      name = var.name
-      git = var.gitUrl
-      os = "linux"
-      arch = "amd64"
-      cmd = var.command
+    content = templatefile("${path.module}/init.sh.tpl",
+      {
+        group  = var.group
+        name   = var.name
+        git    = var.git_url
+        os     = "linux"
+        arch   = "amd64"
+        cmd    = var.command
+        config = var.config_content
     })
   }
 

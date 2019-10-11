@@ -3,6 +3,12 @@
 echo "checkout ${name}"
 sudo git clone ${git} /opt/${group}/${name}
 
+echo "creating setting up ${name} config"
+cat > /opt/${group}/${name}/.${name}.yaml << EOF
+${config}
+EOF
+
+
 echo "creating systemd service"
 cat > /tmp/${name}.service << EOF
 [Unit]
@@ -20,7 +26,7 @@ Restart=on-failure
 RestartSec=10
 
 WorkingDirectory=/opt/${group}/${name}
-ExecStart=/opt/${group}/${name}/bin/${os}_${arch}/${name} ${cmd}
+ExecStart=/opt/${group}/${name}/bin/${os}_${arch}/${name} ${cmd} --config=/opt/${group}/${name}/.${name}.yaml
 
 # make sure log directory exists and owned by syslog
 PermissionsStartOnly=true

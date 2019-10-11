@@ -25,5 +25,5 @@ variable vpc {
 
 variable backend_port {
   description = "The port of the backend app being targeted"
-  default = "8080"
+  default     = "8080"
 }
