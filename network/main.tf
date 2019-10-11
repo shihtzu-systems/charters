@@ -37,5 +37,30 @@ module alb {
 
   logging_enabled = false
 
+  https_listeners = [
+    {
+      certificate_arn = var.cert_arn
+      port            = 443
+    }
+  ]
+  https_listeners_count = "1"
+
+  http_tcp_listeners = [
+    {
+      protocol = "HTTP"
+      port     = "80"
+    }
+  ]
+  http_tcp_listeners_count = "1"
+
+  target_groups = [
+    {
+      name             = var.name
+      backend_protocol = "HTTP"
+      backend_port     = var.backend_port
+    }
+  ]
+  target_groups_count = "1"
+
   tags = local.common_tags
 }
