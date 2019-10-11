@@ -17,7 +17,7 @@ write_files:
     %{ endfor ~}
 runcmd:
 - [ echo, "hello" ]
-%{ for cmd in preInitCommands ~}
+%{ for cmd in preInitCmds ~}
 - ${cmd}
 %{ endfor ~}
 - [ init.sh ]
