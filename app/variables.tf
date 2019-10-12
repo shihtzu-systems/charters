@@ -6,6 +6,10 @@ variable vpc_id {
   type = string
 }
 
+variable subnet_ids {
+  type = list(string)
+}
+
 variable app {
   description = "v1: app"
   type = object({
@@ -18,7 +22,6 @@ variable app {
     whitelist_ip      = string
     key_pair_name     = string
     config_content    = string
-    vpc_id            = string
   })
 }
 

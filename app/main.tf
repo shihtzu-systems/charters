@@ -26,7 +26,7 @@ module http_internal {
 
   name                = "${var.app.name}-http-internal-traffic"
   description         = "Security group for web-server with HTTP ports open within VPC"
-  vpc_id              = var.compute.vpc_id
+  vpc_id              = var.vpc_id
   ingress_cidr_blocks = ["${var.compute.network_address}/16", "${var.app.whitelist_ip}/32"]
 
   tags = local.common_tags
@@ -38,7 +38,7 @@ module ssh_me {
 
   name                = "${var.app.name}-ssh-debugger-traffic"
   description         = "Security group for ssh to debug the machine"
-  vpc_id              = var.app.vpc_id
+  vpc_id              = var.vpc_id
   ingress_cidr_blocks = ["${var.app.whitelist_ip}/32"]
 
   tags = local.common_tags
@@ -85,7 +85,7 @@ module ec2 {
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = "t2.micro"
   associate_public_ip_address = true
-  subnet_ids                  = var.app.subnet_ids
+  subnet_ids                  = var.subnet_ids
   key_name                    = var.app.key_pair_name
   user_data                   = data.template_cloudinit_config.this.rendered
 
