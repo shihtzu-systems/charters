@@ -1,15 +1,15 @@
 locals {
-  vpc_cidr    = "${var.vpc_network_address}/16"
+  vpc_cidr    = "${var.compute.network_address}/16"
   common_tags = map("Created", "terraform")
 }
 
 module vpc {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = var.cluster_name
-  cidr = "${var.vpc_network_address}/16"
+  name = var.compute.name
+  cidr = local.vpc_cidr
 
-  azs = ["${var.region}a", "${var.region}b", "${var.region}c"]
+  azs = ["${var.compute.region}a", "${var.compute.region}b", "${var.compute.region}c"]
 
   private_subnets = [
     cidrsubnet(local.vpc_cidr, 8, 1),
@@ -59,7 +59,7 @@ module vpc {
   tags = merge(
     local.common_tags,
     map(
-      "kubernetes.io/cluster/${var.cluster_name}", "shared"
+      "kubernetes.io/cluster/${var.compute.name}", "shared"
   ))
 }
 

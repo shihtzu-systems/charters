@@ -22,10 +22,10 @@ module http_internal {
   source  = "terraform-aws-modules/security-group/aws//modules/http-8080"
   version = "3.1.0"
 
-  name                = "${var.name}-http-internal-traffic"
+  name                = "${var.app.name}-http-internal-traffic"
   description         = "Security group for web-server with HTTP ports open within VPC"
-  vpc_id              = var.vpc.vpc_id
-  ingress_cidr_blocks = ["${var.vpc.network_address}/16", "${var.whitelist_ip}/32"]
+  vpc_id              = var.compute.vpc_id
+  ingress_cidr_blocks = ["${var.compute.network_address}/16", "${var.app.whitelist_ip}/32"]
 
   tags = local.common_tags
 }
@@ -34,10 +34,10 @@ module ssh_me {
   source  = "terraform-aws-modules/security-group/aws//modules/ssh"
   version = "3.1.0"
 
-  name                = "${var.name}-ssh-debugger-traffic"
+  name                = "${var.app.name}-ssh-debugger-traffic"
   description         = "Security group for ssh to debug the machine"
-  vpc_id              = var.vpc.vpc_id
-  ingress_cidr_blocks = ["${var.whitelist_ip}/32"]
+  vpc_id              = var.app.vpc_id
+  ingress_cidr_blocks = ["${var.app.whitelist_ip}/32"]
 
   tags = local.common_tags
 }
@@ -51,10 +51,10 @@ data template_cloudinit_config this {
     content_type = "text/cloud-config"
     content = templatefile("${path.module}/init.conf.tpl",
       {
-        group       = var.group
-        name        = var.name
-        packages    = var.packages
-        preInitCmds = var.pre_init_commands
+        group       = var.app.group
+        name        = var.app.name
+        packages    = var.app.packages
+        preInitCmds = var.app.pre_init_commands
     })
   }
 
@@ -63,13 +63,13 @@ data template_cloudinit_config this {
     content_type = "text/x-shellscript"
     content = templatefile("${path.module}/init.sh.tpl",
       {
-        group  = var.group
-        name   = var.name
-        git    = var.git_url
+        group  = var.app.group
+        name   = var.app.name
+        git    = var.app.git_url
         os     = "linux"
         arch   = "amd64"
-        cmd    = var.command
-        config = var.config_content
+        cmd    = var.app.command
+        config = var.app.config_content
     })
   }
 
@@ -79,12 +79,12 @@ module ec2 {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "2.8.0"
 
-  name                        = var.name
+  name                        = var.app.name
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = "t2.micro"
   associate_public_ip_address = true
-  subnet_ids                  = var.vpc.public_subnet_ids
-  key_name                    = var.key_pair_name
+  subnet_ids                  = var.app.subnet_ids
+  key_name                    = var.app.key_pair_name
   user_data                   = data.template_cloudinit_config.this.rendered
 
   vpc_security_group_ids = [

@@ -1,29 +1,23 @@
-variable name {
-  description = "Name of the networking stuff"
-}
-
-variable subdomain {
-  description = "The DNS subdomain to use"
-}
-
-variable domain {
-  description = "The DNS domain to use"
-}
-
-variable cert_domain {
-  description = "The domain of the cert to look up"
-}
-
-variable vpc {
-  description = "v1: vpc info"
+variable network {
+  description = "v1: network"
   type = object({
-    vpc_id            = string
-    network_address   = string
-    public_subnet_ids = list(string)
+    name         = string
+    subnet_ids = list(string)
+    subdomain    = string
+    domain       = string
+    cert_domain  = string
+    backend_port = string
+    logging_bucket = string
+    vpc_id = string
+    subnet_ids = list(string)
   })
 }
 
-variable backend_port {
-  description = "The port of the backend app being targeted"
-  default     = "8080"
+variable compute {
+  description = "v1: compute"
+  type = object({
+    name            = string
+    region_name     = string
+    network_address = string
+  })
 }
