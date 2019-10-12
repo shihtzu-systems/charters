@@ -24,7 +24,7 @@ module http_all {
 
   name                = "${var.network.name}-http-all-traffic"
   description         = "Security group for web-server with HTTP ports open within VPC"
-  vpc_id              = var.network.vpc_id
+  vpc_id              = var.vpc_id
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
   tags = local.common_tags
@@ -36,7 +36,7 @@ module https_all {
 
   name                = "${var.network.name}-https-all-traffic"
   description         = "Security group for web-server with HTTPS ports open within VPC"
-  vpc_id              = var.network.vpc_id
+  vpc_id              = var.vpc_id
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
   tags = local.common_tags
@@ -48,8 +48,8 @@ module alb {
 
   load_balancer_name = var.network.name
   security_groups    = [module.http_all.this_security_group_id, module.https_all.this_security_group_id]
-  vpc_id             = var.network.vpc_id
-  subnets            = var.network.subnet_ids
+  vpc_id             = var.vpc_id
+  subnets            = var.subnet_ids
 
   logging_enabled = true
 

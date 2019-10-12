@@ -5,7 +5,7 @@ output bucket_id {
 
 output bucket_arn {
   description = "The ARN of the bucket. Will be of format arn:aws:s3:::bucketname."
-  value       = module.bucket.his_s3_bucket_arn
+  value       = module.bucket.this_s3_bucket_arn
 }
 
 output bucket_domain_name {
