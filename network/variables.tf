@@ -2,7 +2,6 @@ variable network {
   description = "v1: network"
   type = object({
     name           = string
-    subnet_ids     = list(string)
     subdomain      = string
     domain         = string
     cert_domain    = string
