@@ -1,6 +1,20 @@
 locals {
   vpc_cidr    = "${var.compute.network_address}/16"
-  common_tags = map("Created", "terraform")
+  common_tags = {
+    Created = "terraform"
+  }
+  internal_lb_tags = {
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/role/alb-ingress" = "1"
+  }
+  public_lb_tags = {
+    "kubernetes.io/role/elb" = "1"
+    "kubernetes.io/role/alb-ingress" = "1"
+  }
+}
+
+data aws_availability_zones this {
+  state = "available"
 }
 
 module vpc {
@@ -9,7 +23,11 @@ module vpc {
   name = var.compute.name
   cidr = local.vpc_cidr
 
-  azs = ["${var.compute.region}a", "${var.compute.region}b", "${var.compute.region}c"]
+  azs = [
+    data.aws_availability_zones.this.names[0],
+    data.aws_availability_zones.this.names[1],
+    data.aws_availability_zones.this.names[2]
+  ]
 
   private_subnets = [
     cidrsubnet(local.vpc_cidr, 8, 1),
@@ -19,10 +37,7 @@ module vpc {
 
   private_subnet_tags = merge(
     local.common_tags,
-    map(
-      "kubernetes.io/role/internal-elb", "1",
-      "kubernetes.io/role/alb-ingress", "1"
-    )
+    local.internal_lb_tags,
   )
 
   public_subnets = [
@@ -33,10 +48,7 @@ module vpc {
 
   public_subnet_tags = merge(
     local.common_tags,
-    map(
-      "kubernetes.io/role/elb", "1",
-      "kubernetes.io/role/alb-ingress", "1"
-    )
+    local.public_lb_tags,
   )
 
   database_subnets = [

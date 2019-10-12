@@ -1,5 +1,7 @@
 locals {
-  common_tags = map("Created", "terraform")
+  common_tags = {
+    Created = "terraform"
+  }
 }
 
 data aws_ami ubuntu {
