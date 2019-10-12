@@ -1,15 +1,15 @@
 variable network {
   description = "v1: network"
   type = object({
-    name         = string
-    subnet_ids = list(string)
-    subdomain    = string
-    domain       = string
-    cert_domain  = string
-    backend_port = string
+    name           = string
+    subnet_ids     = list(string)
+    subdomain      = string
+    domain         = string
+    cert_domain    = string
+    backend_port   = string
     logging_bucket = string
-    vpc_id = string
-    subnet_ids = list(string)
+    vpc_id         = string
+    subnet_ids     = list(string)
   })
 }
 

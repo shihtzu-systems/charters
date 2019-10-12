@@ -53,7 +53,7 @@ module alb {
 
   logging_enabled = true
 
-  log_bucket_name = module.bucket.this_s3_bucket_id
+  log_bucket_name     = module.bucket.this_s3_bucket_id
   log_location_prefix = var.network.name
 
   https_listeners = [
@@ -64,13 +64,13 @@ module alb {
   ]
   https_listeners_count = "1"
 
-//  http_tcp_listeners = [
-//    {
-//      protocol = "HTTP"
-//      port     = "80"
-//    }
-//  ]
-//  http_tcp_listeners_count = "1"
+  //  http_tcp_listeners = [
+  //    {
+  //      protocol = "HTTP"
+  //      port     = "80"
+  //    }
+  //  ]
+  //  http_tcp_listeners_count = "1"
 
   target_groups = [
     {
