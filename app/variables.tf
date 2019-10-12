@@ -21,7 +21,6 @@ variable app {
     packages          = list(string)
     whitelist_ip      = string
     key_pair_name     = string
-    config_content    = string
   })
 }
 
