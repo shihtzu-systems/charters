@@ -1,3 +1,11 @@
+variable config_content {
+  type = string
+}
+
+variable vpc_id {
+  type = string
+}
+
 variable app {
   description = "v1: app"
   type = object({

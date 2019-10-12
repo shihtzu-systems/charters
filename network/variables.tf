@@ -1,3 +1,11 @@
+variable vpc_id {
+  type = string
+}
+
+variable subnet_ids {
+  type = list(string)
+}
+
 variable network {
   description = "v1: network"
   type = object({
@@ -7,8 +15,6 @@ variable network {
     cert_domain    = string
     backend_port   = string
     logging_bucket = string
-    vpc_id         = string
-    subnet_ids     = list(string)
   })
 }
 
