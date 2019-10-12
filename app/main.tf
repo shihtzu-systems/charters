@@ -71,7 +71,7 @@ data template_cloudinit_config this {
         os     = "linux"
         arch   = "amd64"
         cmd    = var.app.command
-        config = var.app.config_content
+        config = var.config_content
     })
   }
 
