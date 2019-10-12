@@ -10,16 +10,6 @@ data aws_acm_certificate this {
   most_recent = true
 }
 
-module bucket {
-  source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "1.0.0"
-
-  bucket = var.network.logging_bucket
-  acl    = "private"
-
-  tags = local.common_tags
-}
-
 module http_all {
   source  = "terraform-aws-modules/security-group/aws//modules/http-80"
   version = "3.1.0"
@@ -53,10 +43,7 @@ module alb {
   vpc_id             = var.vpc_id
   subnets            = var.subnet_ids
 
-  logging_enabled = true
-
-  log_bucket_name     = module.bucket.this_s3_bucket_id
-  log_location_prefix = var.network.name
+  logging_enabled = false
 
   https_listeners = [
     {
@@ -65,14 +52,6 @@ module alb {
     }
   ]
   https_listeners_count = "1"
-
-  //  http_tcp_listeners = [
-  //    {
-  //      protocol = "HTTP"
-  //      port     = "80"
-  //    }
-  //  ]
-  //  http_tcp_listeners_count = "1"
 
   target_groups = [
     {

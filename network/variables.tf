@@ -14,7 +14,6 @@ variable network {
     domain         = string
     cert_domain    = string
     backend_port   = string
-    logging_bucket = string
   })
 }
 
