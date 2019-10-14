@@ -2,43 +2,43 @@
 # - If omitted, Terraform will assign a random, unique name.
 variable name {
   description = "(Optional, Forces new resource) The name of the target group."
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }
 
 # Required, Forces new resource
 variable port {
   description = "(Required) The port on which targets receive traffic, unless overridden when registering a specific target."
-  type = number
+  type        = number
 }
 
 # Optional, Forces new resource
 # - Should be one of "HTTP" or "HTTPS".
 variable protocol {
   description = "(Required) The protocol to use for routing traffic to the targets."
-  type = string
+  type        = string
 }
 
 # Required
 variable vpc_id {
   description = "(Required) The identifier of the VPC in which to create the target group."
-  type = string
+  type        = string
 }
 
 # Optional
 # - The range is 0-3600 seconds.
 variable deregistration_delay {
   description = "(Optional) The amount time for Elastic Load Balancing to wait before changing the state of a deregistering target from draining to unused."
-  type = number
-  default = 300
+  type        = number
+  default     = 300
 }
 
 # Optional
 # - The range is 30-900 seconds or 0 to disable.
 variable slow_start {
   description = "(Optional) The amount time for targets to warm up before the load balancer sends them a full share of requests."
-  type = number
-  default = 0
+  type        = number
+  default     = 0
 }
 
 # Optional
@@ -125,6 +125,6 @@ variable health_check {
 # Optional
 variable tags {
   description = "(Optional) A mapping of tags to assign to the resource"
-  type = map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
 }
