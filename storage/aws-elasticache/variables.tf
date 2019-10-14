@@ -72,8 +72,8 @@ variable subnet_group_name {
 # EC2 Classic only
 variable security_group_names {
   description = "(Optional, EC2 Classic only) List of security group names to associate with this cache cluster."
-  type        = string
-  default     = ""
+  type        = list(string)
+  default     = []
 }
 
 # Optional
@@ -104,8 +104,8 @@ variable snapshot_arns {
 # - Changing the snapshot_name forces a new resource.
 variable snapshot_name {
   description = "(Optional) The name of a snapshot from which to restore data into the new node group."
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = ""
 }
 
 # Optional
@@ -153,8 +153,8 @@ variable az_mode {
 # Default: System chosen Availability Zone.
 variable availability_zone {
   description = "(Optional) The Availability Zone for the cache cluster."
-  type        = string
-  default     = ""
+  type        = list(string)
+  default     = []
 }
 
 # Optional
@@ -170,8 +170,8 @@ variable availability_zone {
 # Default: System chosen Availability Zones.
 variable preferred_availability_zones {
   description = "(Optional, Memcached only) A list of the Availability Zones in which cache nodes are created."
-  type        = string
-  default     = ""
+  type        = list(string)
+  default     = []
 }
 
 # Optional
