@@ -153,8 +153,8 @@ variable az_mode {
 # Default: System chosen Availability Zone.
 variable availability_zone {
   description = "(Optional) The Availability Zone for the cache cluster."
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = ""
 }
 
 # Optional
