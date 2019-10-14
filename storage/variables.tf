@@ -7,11 +7,12 @@ variable redis_subnet_group_name {
 }
 
 variable storage {
-  description = "v2: storage"
+  description = "v3: storage"
   type = object({
     name        = string
     bucket_name = string
     redis_name  = string
+    redis_node_type = string
   })
 }
 
