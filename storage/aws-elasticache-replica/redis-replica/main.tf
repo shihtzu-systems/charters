@@ -4,16 +4,15 @@ variable cluster_id {
 variable replication_group_id {
   type = string
 }
-
-variable security_group_ids {
-  type = list(string)
+variable tags {
+  type    = map(string)
+  default = {}
 }
 
 module redis_replica {
   source = "../"
 
-  cluster_id = var.cluster_id
+  cluster_id           = var.cluster_id
   replication_group_id = var.replication_group_id
-
-  security_group_ids = var.security_group_ids
+  tags                 = var.tags
 }

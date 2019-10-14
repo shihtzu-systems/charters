@@ -15,7 +15,6 @@ module http_all {
   version = "3.1.0"
 
   name                = "${var.network.name}-http-all-traffic"
-  description         = "Security group for web-server with HTTP ports open within VPC"
   vpc_id              = var.vpc_id
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
@@ -27,7 +26,6 @@ module https_all {
   version = "3.1.0"
 
   name                = "${var.network.name}-https-all-traffic"
-  description         = "Security group for web-server with HTTPS ports open within VPC"
   vpc_id              = var.vpc_id
   ingress_cidr_blocks = ["0.0.0.0/0"]
 

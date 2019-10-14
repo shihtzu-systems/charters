@@ -9,11 +9,11 @@ variable subnet_ids {
 variable network {
   description = "v1: network"
   type = object({
-    name           = string
-    subdomain      = string
-    domain         = string
-    cert_domain    = string
-    backend_port   = string
+    name         = string
+    subdomain    = string
+    domain       = string
+    cert_domain  = string
+    backend_port = string
   })
 }
 

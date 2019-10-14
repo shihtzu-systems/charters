@@ -25,7 +25,6 @@ module http_internal {
   version = "3.1.0"
 
   name                = "${var.app.name}-http-internal-traffic"
-  description         = "Security group for web-server with HTTP ports open within VPC"
   vpc_id              = var.vpc_id
   ingress_cidr_blocks = ["${var.compute.network_address}/16", "${var.app.whitelist_ip}/32"]
 
@@ -37,7 +36,6 @@ module ssh_me {
   version = "3.1.0"
 
   name                = "${var.app.name}-ssh-debugger-traffic"
-  description         = "Security group for ssh to debug the machine"
   vpc_id              = var.vpc_id
   ingress_cidr_blocks = ["${var.app.whitelist_ip}/32"]
 

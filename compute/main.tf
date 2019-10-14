@@ -1,14 +1,14 @@
 locals {
-  vpc_cidr    = "${var.compute.network_address}/16"
+  vpc_cidr = "${var.compute.network_address}/16"
   common_tags = {
     Created = "terraform"
   }
   internal_lb_tags = {
     "kubernetes.io/role/internal-elb" = "1"
-    "kubernetes.io/role/alb-ingress" = "1"
+    "kubernetes.io/role/alb-ingress"  = "1"
   }
   public_lb_tags = {
-    "kubernetes.io/role/elb" = "1"
+    "kubernetes.io/role/elb"         = "1"
     "kubernetes.io/role/alb-ingress" = "1"
   }
 }
