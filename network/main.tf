@@ -80,6 +80,20 @@ module alb_target_group_attachment {
   port             = 8080
 }
 
+module alb_https_forward {
+  source = "aws-alb-https-forwarder"
+
+  load_balancer_arn = module.alb.arn
+  certificate_arn   = data.aws_acm_certificate.this.arn
+  target_group_arn  = module.alb_target_group.arn
+}
+
+module alb_http_redirect {
+  source = "aws-alb-http-redirecter"
+
+  load_balancer_arn = module.alb.arn
+}
+
 data aws_route53_zone this {
   name         = var.network.domain
   private_zone = false
