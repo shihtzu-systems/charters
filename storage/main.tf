@@ -29,7 +29,7 @@ module redis {
   source = "./aws-elasticache/redis"
 
   cluster_id         = var.storage.redis_name
-  node_type          = "cache.t2.micro"
+  node_type          = "cache.t2.small"
   subnet_group_name  = var.redis_subnet_group_name
   security_group_ids = [module.redis_internal.this_security_group_id]
 
