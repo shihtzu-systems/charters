@@ -81,7 +81,7 @@ module alb_target_group_attachment {
 }
 
 module alb_https_forward {
-  source = "aws-alb-https-forwarder"
+  source = "./aws-alb-https-forwarder"
 
   load_balancer_arn = module.alb.arn
   certificate_arn   = data.aws_acm_certificate.this.arn
@@ -89,7 +89,7 @@ module alb_https_forward {
 }
 
 module alb_http_redirect {
-  source = "aws-alb-http-redirecter"
+  source = "./aws-alb-http-redirecter"
 
   load_balancer_arn = module.alb.arn
 }
