@@ -25,24 +25,23 @@ variable security_groups {
 }
 
 # Required
-variable access_logs {
+variable access_logs_enabled {
   description = "(Required) An Access Logs block."
-  type = object({
+  type        = bool
+}
 
-    # Required
-    # - The S3 bucket name to store the logs in.
-    bucket = string
+# Optional
+variable access_logs_bucket {
+  description = "(Optional) An Access Logs block."
+  type        = string
+  default     = ""
+}
 
-    # Optional
-    # - The S3 bucket prefix.
-    # - Logs are stored in the root if not configured.
-    prefix = string
-
-    # Optional
-    # - Boolean to enable / disable access_logs.
-    # - Defaults to false, even when bucket is specified.
-    enabled = bool
-  })
+# Optional
+variable access_logs_prefix {
+  description = "(Optional) An Access Logs block."
+  type        = string
+  default     = ""
 }
 
 # Optional

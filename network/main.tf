@@ -35,15 +35,15 @@ module https_all {
 module alb {
   source = "./aws-alb"
 
-  name            = var.network.name
-  subnets         = var.subnet_ids
-  security_groups = [module.http_all.this_security_group_id, module.https_all.this_security_group_id]
+  name    = var.network.name
+  subnets = var.subnet_ids
+  security_groups = [
+    module.http_all.this_security_group_id,
+    module.https_all.this_security_group_id
+  ]
+  access_logs_enabled = false
 
   tags = local.common_tags
-
-  access_logs = {
-    enabled = false
-  }
 }
 
 module alb_target_group {
@@ -53,23 +53,10 @@ module alb_target_group {
   port     = 8080
   protocol = "HTTP"
 
-  health_check = {
-    enabled             = true
-    matcher             = "200"
-    path                = "/health"
-    interval            = 30
-    port                = "traffic-port"
-    protocol            = "HTTP"
-    timeout             = 5
-    healthy_threshold   = 3
-    unhealthy_threshold = 3
-  }
+  health_check_enabled = true
 
-  stickiness = {
-    enabled         = true
-    type            = "lb_cookie"
-    cookie_duration = 86400
-  }
+  stickiness_enabled = true
+
   tags = local.common_tags
 }
 
