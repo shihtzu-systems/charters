@@ -30,7 +30,7 @@ module redis {
 
   cluster_id         = var.storage.redis_name
   node_type          = "cache.t2.micro"
-  subnet_group_name  = var.subnet_group_name
+  subnet_group_name  = var.redis_subnet_group_name
   security_group_ids = [module.redis_internal.this_security_group_id]
 
   tags = local.common_tags

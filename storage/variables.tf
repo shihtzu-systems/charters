@@ -2,7 +2,7 @@ variable vpc_id {
   type = string
 }
 
-variable subnet_group_name {
+variable redis_subnet_group_name {
   type = string
 }
 
