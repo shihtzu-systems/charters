@@ -6,6 +6,10 @@ variable subnet_ids {
   type = list(string)
 }
 
+variable instance_id {
+  type = string
+}
+
 variable network {
   description = "v1: network"
   type = object({
