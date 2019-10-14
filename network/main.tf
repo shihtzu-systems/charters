@@ -33,32 +33,11 @@ module https_all {
 }
 
 module alb {
-  source  = "terraform-aws-modules/alb/aws"
-  version = "4.1.0"
+  source = "aws-application-load-balancer"
 
-  load_balancer_name = var.network.name
-  security_groups    = [module.http_all.this_security_group_id, module.https_all.this_security_group_id]
-  vpc_id             = var.vpc_id
-  subnets            = var.subnet_ids
-
-  logging_enabled = false
-
-  https_listeners = [
-    {
-      certificate_arn = data.aws_acm_certificate.this.arn
-      port            = 443
-    }
-  ]
-  https_listeners_count = "1"
-
-  target_groups = [
-    {
-      name             = var.network.name
-      backend_protocol = "HTTP"
-      backend_port     = var.network.backend_port
-    }
-  ]
-  target_groups_count = "1"
+  name            = var.network.name
+  subnets         = var.subnet_ids
+  security_groups = [module.http_all.this_security_group_id, module.https_all.this_security_group_id]
 
   tags = local.common_tags
 }
@@ -75,7 +54,7 @@ resource aws_route53_record this {
 
   alias {
     name                   = module.alb.dns_name
-    zone_id                = module.alb.load_balancer_zone_id
+    zone_id                = module.alb.zone_id
     evaluate_target_health = true
   }
 }
