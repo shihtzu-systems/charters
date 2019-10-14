@@ -24,9 +24,9 @@ variable security_groups {
   default     = []
 }
 
-# Optional
+# Required
 variable access_logs {
-  description = "(Optional) An Access Logs block."
+  description = "(Required) An Access Logs block."
   type = object({
 
     # Required
@@ -43,7 +43,6 @@ variable access_logs {
     # - Defaults to false, even when bucket is specified.
     enabled = bool
   })
-  default = {}
 }
 
 # Optional
@@ -53,23 +52,6 @@ variable subnets {
   description = "(Optional) A list of subnet IDs to attach to the LB"
   type        = list(string)
   default     = []
-}
-
-# Optional
-variable subnet_mapping {
-  description = "(Optional) A subnet mapping block as documented below."
-  type = object({
-
-    # Required
-    # - The id of the subnet of which to attach to the load balancer.
-    # - You can specify only one subnet per Availability Zone.
-    subnet_id = string
-
-    # Optional
-    # - The allocation ID of the Elastic IP address.
-    allocation_id = string
-  })
-  default = {}
 }
 
 # Optional

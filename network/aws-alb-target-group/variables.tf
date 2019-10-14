@@ -41,9 +41,9 @@ variable slow_start {
   default     = 0
 }
 
-# Optional
+# Required
 variable stickiness {
-  description = "(Optional) A Stickiness block."
+  description = "(Required) A Stickiness block."
   type = object({
 
     # Required
@@ -63,14 +63,12 @@ variable stickiness {
     # - Default is true
     enabled = bool
   })
-  default = 0
 }
 
-# Optional
+# Required
 variable health_check {
-  description = "(Optional) A Health Check block."
+  description = "(Required) A Health Check block."
   type = object({
-
     # Required
     # - The HTTP codes to use when checking for a successful response from a target.
     # - You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299"
@@ -119,7 +117,6 @@ variable health_check {
     # - Defaults to 3
     unhealthy_threshold = number
   })
-  default = {}
 }
 
 # Optional
