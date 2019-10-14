@@ -19,6 +19,7 @@ module redis {
 
   cluster_id = var.storage.redis_name
   node_type = "cache.t2.micro"
+  security_group_ids = var.security_group_ids
 
   tags = local.common_tags
 }

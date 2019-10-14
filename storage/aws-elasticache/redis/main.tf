@@ -18,6 +18,10 @@ variable port {
   default = 6379
 }
 
+variable security_group_ids {
+  type = list(string)
+}
+
 module redis {
   source = "../"
 
@@ -28,4 +32,6 @@ module redis {
   parameter_group_name = var.parameter_group_name
   engine_version = var.engine_version
   port = var.port
+
+  security_group_ids = var.security_group_ids
 }

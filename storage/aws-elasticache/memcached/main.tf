@@ -18,6 +18,10 @@ variable port {
   default = 11211
 }
 
+variable security_group_ids {
+  type = list(string)
+}
+
 module redis {
   source = "../"
 
@@ -27,13 +31,6 @@ module redis {
   num_cache_nodes = var.num_cache_nodes
   parameter_group_name = var.parameter_group_name
   port = var.port
-}
 
-// resource "aws_elasticache_cluster" "example" {
-//  cluster_id           = "cluster-example"
-//  engine               = ""
-//  node_type            = ""
-//  num_cache_nodes      = 2
-//  parameter_group_name = ""
-//  port                 = 11211
-//}
+  security_group_ids = security_group_ids
+}
