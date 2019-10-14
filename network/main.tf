@@ -49,6 +49,7 @@ module alb {
 module alb_target_group {
   source = "./aws-alb-target-group"
 
+  name     = "${var.network.name}-target"
   vpc_id   = var.vpc_id
   port     = 8080
   protocol = "HTTP"
@@ -61,7 +62,8 @@ module alb_target_group {
 }
 
 module alb_target_group_attachment {
-  source           = "./aws-alb-target-group-attachment"
+  source = "./aws-alb-target-group-attachment"
+
   target_id        = var.instance_id
   target_group_arn = module.alb_target_group.arn
   port             = 8080
