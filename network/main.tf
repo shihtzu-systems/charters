@@ -40,6 +40,10 @@ module alb {
   security_groups = [module.http_all.this_security_group_id, module.https_all.this_security_group_id]
 
   tags = local.common_tags
+
+  access_logs = {
+    enabled = false
+  }
 }
 
 module alb_target_group {
