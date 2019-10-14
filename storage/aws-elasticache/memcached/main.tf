@@ -17,6 +17,9 @@ variable port {
   type    = number
   default = 11211
 }
+variable subnet_group_name {
+  type = string
+}
 variable security_group_ids {
   type = list(string)
 }
@@ -34,6 +37,7 @@ module redis {
   num_cache_nodes      = var.num_cache_nodes
   parameter_group_name = var.parameter_group_name
   port                 = var.port
-  security_group_ids   = security_group_ids
+  subnet_group_name    = var.subnet_group_name
+  security_group_ids   = var.security_group_ids
   tags                 = var.tags
 }

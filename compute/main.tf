@@ -51,6 +51,10 @@ module vpc {
     local.public_lb_tags,
   )
 
+  create_database_subnet_group = true
+
+  create_database_subnet_route_table = true
+
   database_subnets = [
     cidrsubnet(local.vpc_cidr, 8, 201),
     cidrsubnet(local.vpc_cidr, 8, 202),
@@ -60,6 +64,16 @@ module vpc {
   database_subnet_tags = merge(
     local.common_tags
   )
+
+  create_elasticache_subnet_group = true
+
+  create_elasticache_subnet_route_table = true
+
+  elasticache_subnets = [
+    cidrsubnet(local.vpc_cidr, 8, 211),
+    cidrsubnet(local.vpc_cidr, 8, 212),
+    cidrsubnet(local.vpc_cidr, 8, 213),
+  ]
 
   enable_dns_hostnames = true
   enable_dns_support   = true

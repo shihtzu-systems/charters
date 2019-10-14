@@ -2,6 +2,10 @@ variable vpc_id {
   type = string
 }
 
+variable subnet_group_name {
+  type = string
+}
+
 variable storage {
   description = "v2: storage"
   type = object({
