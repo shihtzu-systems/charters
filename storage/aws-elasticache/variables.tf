@@ -5,19 +5,11 @@ variable cluster_id {
   type        = string
 }
 
-# Optional
-variable replication_group_id {
-  description = "(Optional) The ID of the replication group to which this cluster should belong."
-  type        = string
-  default     = ""
-}
-
-# Required (unless replication_group_id is provided)
+# Required
 # - Valid values for this parameter are memcached or redis
 variable engine {
-  description = "(Required unless replication_group_id is provided) Name of the cache engine to be used for this cache cluster"
+  description = "(Required) Name of the cache engine to be used for this cache cluster"
   type        = string
-  default     = ""
 }
 
 # Optional
@@ -36,29 +28,26 @@ variable maintenance_window {
   default     = ""
 }
 
-# Required (unless replication_group_id is provided)
+# Required
 # Example: cache.t2.micro
 variable node_type {
-  description = "(Required unless replication_group_id is provided) The compute and memory capacity of the nodes."
+  description = "(Required) The compute and memory capacity of the nodes."
   type        = string
-  default     = ""
 }
 
-# Required (unless replication_group_id is provided)
+# Required
 # - For Redis, this value must be 1.
 # - For Memcache, this value must be between 1 and 20
 variable num_cache_nodes {
-  description = "(Required unless replication_group_id is provided) The initial number of cache nodes that the cache cluster will have."
+  description = "(Required) The initial number of cache nodes that the cache cluster will have."
   type        = number
-  default     = 1
 }
 
-# Required (unless replication_group_id is provided)
+# Required
 # Example: default.redis3.2
 variable parameter_group_name {
-  description = "(Required unless replication_group_id is provided) Name of the parameter group to associate with this cache cluster."
+  description = "(Required) Name of the parameter group to associate with this cache cluster."
   type        = string
-  default     = ""
 }
 
 # Optional
