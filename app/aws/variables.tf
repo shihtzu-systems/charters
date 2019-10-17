@@ -11,11 +11,12 @@ variable subnet_ids {
 }
 
 variable app {
-  description = "v1: app"
+  description = "v2: app"
   type = object({
     name              = string
     group             = string
     git_url           = string
+    archive_url       = string
     pre_init_commands = list(string)
     command           = string
     packages          = list(string)

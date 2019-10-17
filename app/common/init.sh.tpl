@@ -1,13 +1,22 @@
 #!/usr/bin/env bash
 
-echo "checkout ${name}"
-sudo git clone ${git} /opt/${group}/${name}
+echo "download archive ${name}"
+mkdir -p /opt/${group}/${name}
+curl -L ${archiveUrl} -o /opt/${group}/${name}/${name}.zip
+unzip /opt/${group}/${name}/${name}.zip -d /opt/${group}/${name}
+
+echo "create update script"
+cat > /opt/${group}/${name}/update.sh << EOF
+#!/usr/bin/env bash
+curl -L ${archiveUrl} -o /opt/${group}/${name}/${name}.zip
+unzip /opt/${group}/${name}/${name}.zip -d /opt/${group}/${name}
+EOF
+chmod +x /opt/${group}/${name}/update.sh
 
 echo "creating setting up ${name} config"
 cat > /opt/${group}/${name}/.${name}.yaml << EOF
 ${config}
 EOF
-
 
 echo "creating systemd service"
 cat > /tmp/${name}.service << EOF
