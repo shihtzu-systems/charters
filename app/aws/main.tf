@@ -63,13 +63,14 @@ data template_cloudinit_config this {
     content_type = "text/x-shellscript"
     content = templatefile("${path.module}/../common/init.sh.tpl",
       {
-        group  = var.app.group
-        name   = var.app.name
-        git    = var.app.git_url
-        os     = "linux"
-        arch   = "amd64"
-        cmd    = var.app.command
-        config = var.config_content
+        group      = var.app.group
+        name       = var.app.name
+        git        = var.app.git_url
+        archiveUrl = var.app.archive_url
+        os         = "linux"
+        arch       = "amd64"
+        cmd        = var.app.command
+        config     = var.config_content
     })
   }
 
