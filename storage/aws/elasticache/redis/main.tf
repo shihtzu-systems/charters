@@ -29,7 +29,7 @@ variable tags {
 }
 
 module redis {
-  source = ".."
+  source = "./.."
 
   cluster_id           = var.cluster_id
   engine               = "redis"
