@@ -10,7 +10,7 @@ variable tags {
 }
 
 module redis_replica {
-  source = "../"
+  source = ".."
 
   cluster_id           = var.cluster_id
   replication_group_id = var.replication_group_id

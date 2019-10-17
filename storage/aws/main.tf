@@ -26,7 +26,7 @@ module redis_internal {
 }
 
 module redis {
-  source = "./aws-elasticache/redis"
+  source = "./elasticache/redis"
 
   cluster_id         = var.storage.redis_name
   node_type          = var.storage.redis_node_type

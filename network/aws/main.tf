@@ -33,7 +33,7 @@ module https_all {
 }
 
 module alb {
-  source = "./aws-alb"
+  source = "./application-load-balancer"
 
   name    = var.network.name
   subnets = var.subnet_ids
@@ -47,7 +47,7 @@ module alb {
 }
 
 module alb_target_group {
-  source = "./aws-alb-target-group"
+  source = "./application-load-balancer/target-group"
 
   name     = "${var.network.name}-target"
   vpc_id   = var.vpc_id
@@ -62,7 +62,7 @@ module alb_target_group {
 }
 
 module alb_target_group_attachment {
-  source = "./aws-alb-target-group-attachment"
+  source = "./application-load-balancer/target-group-attachment"
 
   target_id        = var.instance_id
   target_group_arn = module.alb_target_group.arn
@@ -70,7 +70,7 @@ module alb_target_group_attachment {
 }
 
 module alb_https_forward {
-  source = "./aws-alb-https-forwarder"
+  source = "./application-load-balancer/https-forwarder"
 
   load_balancer_arn = module.alb.arn
   certificate_arn   = data.aws_acm_certificate.this.arn
@@ -78,7 +78,7 @@ module alb_https_forward {
 }
 
 module alb_http_redirect {
-  source = "./aws-alb-http-redirecter"
+  source = "./application-load-balancer/http-redirecter"
 
   load_balancer_arn = module.alb.arn
 }

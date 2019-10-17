@@ -49,7 +49,7 @@ data template_cloudinit_config this {
   part {
     filename     = "init.conf"
     content_type = "text/cloud-config"
-    content = templatefile("${path.module}/init.conf.tpl",
+    content = templatefile("${path.module}/../common/init.conf.tpl",
       {
         group       = var.app.group
         name        = var.app.name
@@ -61,7 +61,7 @@ data template_cloudinit_config this {
   part {
     filename     = "init.sh"
     content_type = "text/x-shellscript"
-    content = templatefile("${path.module}/init.sh.tpl",
+    content = templatefile("${path.module}/../common/init.sh.tpl",
       {
         group  = var.app.group
         name   = var.app.name
