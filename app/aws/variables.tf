@@ -11,7 +11,7 @@ variable subnet_ids {
 }
 
 variable app {
-  description = "v2: app"
+  description = "app.v2"
   type = object({
     name              = string
     group             = string
@@ -26,7 +26,7 @@ variable app {
 }
 
 variable compute {
-  description = "v1: compute"
+  description = "compute.v1"
   type = object({
     name            = string
     region_name     = string

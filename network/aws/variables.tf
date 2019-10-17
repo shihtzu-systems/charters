@@ -11,7 +11,7 @@ variable instance_id {
 }
 
 variable network {
-  description = "v1: network"
+  description = "network.v1"
   type = object({
     name         = string
     subdomain    = string
@@ -22,7 +22,7 @@ variable network {
 }
 
 variable compute {
-  description = "v1: compute"
+  description = "compute.v1"
   type = object({
     name            = string
     region_name     = string
